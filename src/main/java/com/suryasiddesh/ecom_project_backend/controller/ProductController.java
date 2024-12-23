@@ -4,27 +4,33 @@ import com.suryasiddesh.ecom_project_backend.model.Product;
 import com.suryasiddesh.ecom_project_backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/api")
 @RestController
+
 public class ProductController {
 
     @Autowired
     ProductService service;
 
-    @RequestMapping("/ProductById/{id}")
-    public Product getProdById(@RequestBody int prodId) {
-        return service.getProductById(prodId);
+    @RequestMapping("/products/{id}")
+    public Product getProdById(@PathVariable Long id) {
+        return service.getProductById(id);
     }
 
-    @RequestMapping("/allProducts")
-    public List<Product> getAllProducts(){
+
+    @RequestMapping("/products")
+    public List<Product> getAllProducts() {
         return service.getAllProducts();
     }
+
+    @RequestMapping("/addProduct")
+    public Product addProduct(@RequestBody Product product)
+    {
+        return service.addProduct(product);
+    }
+
 }
