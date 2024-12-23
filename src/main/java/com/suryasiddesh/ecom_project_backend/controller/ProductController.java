@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,12 +31,6 @@ public class ProductController {
         return new ResponseEntity<>(service.getAllProducts(),HttpStatus.OK);
     }
 
-    @RequestMapping("/addProduct")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product)
-    {
-        return new ResponseEntity<>(service.addProduct(product),HttpStatus.OK);
-    }
-
     @RequestMapping("/updateProduct")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product)
     {
@@ -46,5 +41,18 @@ public class ProductController {
     public ResponseEntity<Optional<Product>> deleteProduct(@PathVariable int prodId)
     {
         return new ResponseEntity<>(service.deleteProduct(prodId),HttpStatus.OK);
+    }
+
+    @PostMapping("/product")
+    public ResponseEntity<?> addproduct(@RequestPart Product product, @RequestPart MultipartFile imageFile)
+    {
+        try
+        {
+            Product productTemp=service.addProduct(product,imageFile);
+            return new ResponseEntity<>(productTemp,HttpStatus.OK);
+        } catch (Exception e)
+        {
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.OK);
+        }
     }
 }
