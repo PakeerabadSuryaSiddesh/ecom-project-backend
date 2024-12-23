@@ -15,7 +15,7 @@ public class ProductService {
     @Autowired
     ProductRepository repo;
 
-    public Product getProductById(Long prodId) {
+    public Product getProductById(int prodId) {
         return repo.findById(prodId)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found with ID: " + prodId));
     }
@@ -35,7 +35,7 @@ public class ProductService {
         return repo.save(product);
     }
 
-    public Optional<Product> deleteProduct(Long prodId)
+    public Optional<Product> deleteProduct(int prodId)
     {
         Optional<Product> prod1=repo.findById(prodId);
          repo.deleteById(prodId);

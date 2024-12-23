@@ -17,8 +17,8 @@ public class ProductController {
     @Autowired
     ProductService service;
 
-    @GetMapping("/products/{id}")
-    public Product getProdById(@PathVariable Long id) {
+    @GetMapping("/product/{id}")
+    public Product getProdById(@PathVariable int id) {
         return service.getProductById(id);
     }
 
@@ -41,7 +41,7 @@ public class ProductController {
     }
 
     @RequestMapping("/deleteProduct/{prodId}")
-    public Optional<Product> deleteProduct(@PathVariable Long prodId)
+    public Optional<Product> deleteProduct(@PathVariable int prodId)
     {
         return service.deleteProduct(prodId);
     }
