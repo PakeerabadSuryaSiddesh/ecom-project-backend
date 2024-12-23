@@ -29,4 +29,9 @@ public class ProductService {
         return repo.save(product);
     }
 
+    public Product updateProduct(Product product)
+    {
+        return repo.save(product);
+    }
+
 }

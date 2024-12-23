@@ -33,4 +33,10 @@ public class ProductController {
         return service.addProduct(product);
     }
 
+    @RequestMapping("/updateProduct")
+    public Product updateProduct(@RequestBody Product product)
+    {
+        return service.updateProduct(product);
+    }
+
 }
