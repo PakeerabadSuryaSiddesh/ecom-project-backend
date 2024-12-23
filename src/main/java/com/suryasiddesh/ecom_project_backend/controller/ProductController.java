@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping("/api")
+@CrossOrigin
 @RestController
-
+@RequestMapping("/api")
 public class ProductController {
 
     @Autowired
     ProductService service;
 
-    @RequestMapping("/products/{id}")
+    @GetMapping("/products/{id}")
     public Product getProdById(@PathVariable Long id) {
         return service.getProductById(id);
     }
 
 
-    @RequestMapping("/products")
+    @GetMapping("/products")
     public List<Product> getAllProducts() {
         return service.getAllProducts();
     }
