@@ -3,6 +3,8 @@ package com.suryasiddesh.ecom_project_backend.controller;
 import com.suryasiddesh.ecom_project_backend.model.Product;
 import com.suryasiddesh.ecom_project_backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,31 +20,31 @@ public class ProductController {
     ProductService service;
 
     @GetMapping("/product/{id}")
-    public Product getProdById(@PathVariable int id) {
-        return service.getProductById(id);
+    public ResponseEntity<Product> getProdById(@PathVariable int id) {
+        return new ResponseEntity<>(service.getProductById(id), HttpStatus.OK);
     }
 
 
     @GetMapping("/products")
-    public List<Product> getAllProducts() {
-        return service.getAllProducts();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        return new ResponseEntity<>(service.getAllProducts(),HttpStatus.OK);
     }
 
     @RequestMapping("/addProduct")
-    public Product addProduct(@RequestBody Product product)
+    public ResponseEntity<Product> addProduct(@RequestBody Product product)
     {
-        return service.addProduct(product);
+        return new ResponseEntity<>(service.addProduct(product),HttpStatus.OK);
     }
 
     @RequestMapping("/updateProduct")
-    public Product updateProduct(@RequestBody Product product)
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product)
     {
-        return service.updateProduct(product);
+        return new ResponseEntity<>( service.updateProduct(product),HttpStatus.OK);
     }
 
     @RequestMapping("/deleteProduct/{prodId}")
-    public Optional<Product> deleteProduct(@PathVariable int prodId)
+    public ResponseEntity<Optional<Product>> deleteProduct(@PathVariable int prodId)
     {
-        return service.deleteProduct(prodId);
+        return new ResponseEntity<>(service.deleteProduct(prodId),HttpStatus.OK);
     }
 }
