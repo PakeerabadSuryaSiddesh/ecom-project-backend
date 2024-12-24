@@ -5,6 +5,7 @@ import com.suryasiddesh.ecom_project_backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,5 +55,16 @@ public class ProductController {
         {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.OK);
         }
+    }
+
+    @GetMapping("product/{prodId}/image")
+    public ResponseEntity<byte[]> getImageByProductId(@PathVariable int prodId)
+    {
+        Product productTemp=service.getProductById(prodId);
+        byte[] imageDataObj=productTemp.getImageData();
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.valueOf(productTemp.getImageType()))
+                .body(imageDataObj);
     }
 }

@@ -22,8 +22,8 @@ public class Product {
     private String description;
     private BigDecimal price;
     private Date releaseDate;
-    private boolean available;
-    private int quantity;
+    private boolean productAvailable;
+    private int StockQuantity;
 
     private String imageName;
     private String imageType;
